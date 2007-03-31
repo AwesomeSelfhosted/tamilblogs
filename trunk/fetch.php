@@ -89,10 +89,11 @@ fclose($fp);
 mail("mugunth@gmail.com", "tamilblogs update ended" , "tamilblogs update ended");
 
 function updateFeedItems($feed,$rss){
-	global $conf;
-	if(empty($feed['name']) && !empty($rss->channel['title'])){
+        global $conf;
+	if((empty($feed['name']) || empty($feed['website'])) && !empty($rss->channel['title'])){
 		$sql = "UPDATE tamilblogs_feeds
-			   SET name = '".addslashes($rss->channel['title'])."'
+                SET name = '".addslashes($rss->channel['title'])."',
+                   website = '".addslashes($rss->channel['link'])."'
 			 WHERE   id = '".addslashes($feed['id'])."'";
 
 	if($_REQUEST['error'] == 'Yes1'){
