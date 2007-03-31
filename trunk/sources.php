@@ -59,13 +59,15 @@ require_once('inc/common.php');
 <tr><td><b>எண்</b> </td> <td> <b>முகவரி</b> </td> <td><b>தலைப்பு </b></td> </tr>
 
 <?php
-	$sql = "SELECT id, url, name FROM tamilblogs_feeds";	  
+	$sql = "SELECT id, url, website, name FROM tamilblogs_feeds where website <> ''";	  
  	$items = runSQL($sql);
 	$totalitems = count($items);
 	
 	for($n = 0; $n < $totalitems; $n++){
 	//print_r($items[$n]);
-	echo "<tr><td>".($n+1)."</td> <td>".$items[$n][url]."</td> <td>".$items[$n][name]."</td> </tr>";
+	if(!empty($items[$n][website])){
+		echo "<tr><td>".($n+1)."</td> <td>".$items[$n][website]."</td> <td>".$items[$n][name]."</td> </tr>";
+	}
 	}
 ?>
 
