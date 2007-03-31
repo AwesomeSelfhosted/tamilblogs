@@ -62,7 +62,7 @@ function doRSS () {
 
 	//for($n = 0; $n < count($items); $n++) {
 	for($n = 0; $n < 25; $n++) {
-		$item_title = $items[$n]['name'].": ".htmlspecialchars($items[$n]['title']);
+		$item_title = htmlspecialchars($items[$n]['title']).": ".$items[$n]['name'] ;
 		$safehtml =& new safehtml();
 		$item_body = $safehtml->parse($items[$n]['body']);
 		$custom_url = 'http://tamilblogs.com/redirect.php?pathivu='.$items[$n]['url'];
