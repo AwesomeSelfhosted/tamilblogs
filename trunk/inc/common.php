@@ -23,7 +23,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 
-$version = "1.20";
+$version = "0.1";
 
 require_once('conf.php');
 require_once('lang/'.$conf['language'].'.inc.php');
@@ -174,7 +174,7 @@ function doSetup() {
 
 function getFeedsCount(){
 	global $totalfeeds;
-	$sql = "select count(url) as totalfeeds from tamilblogs_feeds";
+	$sql = "select count(url) as totalfeeds from tamilblogs_feeds where website <> ''";
 	$items = runSQL($sql);
 	$totalfeeds = $items[0][totalfeeds];
 	//echo $totalfeeds ;
