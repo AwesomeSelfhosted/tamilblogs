@@ -83,7 +83,11 @@ function addUser($user,$pass) {
 	global $conf;
 
 	$sql = "INSERT INTO tamilblogs_users(id, login, pass) VALUES(NULL, '".addslashes($user)."','".addslashes(auth_cryptPassword($pass))."')";
-	runSQL($sql);
+    runSQL($sql);
+
+    /* Insert all the feeds into the tamilblogs_userfeeds table also while creating a new user. This is to make all the feeds visible by default when an user logs in. - Later this can be modified so that only blogs whos ratings are above a threshold rating are inserted by default when user is created*/
+    $sql ="INSERT IGNORE INTO tamilblogs_userfeeds(feed_id, user_id) SELECT A.id, B.id FROM tamilblogs_feeds A, tamilblogs_users B WHERE B.login = '".addslashes($user)."'";
+    runSQL($sql);
 }
 
 function setPassword($uid,$pass) {
